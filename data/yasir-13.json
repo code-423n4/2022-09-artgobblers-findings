@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "yasir",
+  "address": "0xbf9d7b03e099ba3056a27858f39ecdbec56232ff",
+  "risk": "3",
+  "title": "incorrect shift operation: randomSeed = keccak256(uint256,uint256)(0,32) % 1 << 64 ",
+  "issueId": 13,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/13"
+}
