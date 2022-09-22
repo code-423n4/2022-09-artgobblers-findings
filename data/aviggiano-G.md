@@ -48,6 +48,8 @@ E.g. for the first occurrence
 
 **Code changes**
 ```
+$ git diff src/ test/
+
 diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
 index 0d413c0..fb09bcb 100644
 --- a/src/ArtGobblers.sol
@@ -68,6 +70,19 @@ index 0d413c0..fb09bcb 100644
 +                if (getGobblerData[id].owner != msg.sender) revert WrongFrom();
  
                  burnedMultipleTotal += getGobblerData[id].emissionMultiple;
+ 
+diff --git a/test/ArtGobblers.t.sol b/test/ArtGobblers.t.sol
+index 174d7b9..143d656 100644
+--- a/test/ArtGobblers.t.sol
++++ b/test/ArtGobblers.t.sol
+@@ -565,7 +565,7 @@ contract ArtGobblersTest is DSTestPlus {
+         ids.push(999);
+ 
+         vm.prank(users[0]);
+-        vm.expectRevert("WRONG_FROM");
++        vm.expectRevert(ArtGobblers.WrongFrom.selector);
+         gobblers.mintLegendaryGobbler(ids);
+     }
 ```
 
 **Gas changes**
