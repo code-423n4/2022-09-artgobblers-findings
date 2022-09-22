@@ -38,7 +38,35 @@
 	);
 	```
 
-	Use the same previously declared error and replace the mentioned line with:
+	Use the previously declared error and replace the mentioned line with:
 	```
-	if(msg.sender != from || !isApprovedForAll[from][msg.sender] || msg.sender != getApproved[id]) revert InvalidRecipient();
+	if(
+		msg.sender == from || 
+		isApprovedForAll[from][msg.sender] || 
+		msg.sender == getApproved[id],
+		) {
+			delete getApproved[id];
+
+			getGobblerData[id].owner = to;
+
+			unchecked {
+					uint32 emissionMultiple = getGobblerData[id].emissionMultiple; // Caching saves gas.
+
+					// We update their last balance before updating their emission multiple to avoid
+					// penalizing them by retroactively applying their new (lower) emission multiple.
+					getUserData[from].lastBalance = uint128(gooBalance(from));
+					getUserData[from].lastTimestamp = uint64(block.timestamp);
+					getUserData[from].emissionMultiple -= emissionMultiple;
+					getUserData[from].gobblersOwned -= 1;
+
+					// We update their last balance before updating their emission multiple to avoid
+					// overpaying them by retroactively applying their new (higher) emission multiple.
+					getUserData[to].lastBalance = uint128(gooBalance(to));
+					getUserData[to].lastTimestamp = uint64(block.timestamp);
+					getUserData[to].emissionMultiple += emissionMultiple;
+					getUserData[to].gobblersOwned += 1;
+			}
+
+			emit Transfer(from, to, id);
+	} else revert InvalidRecipient();
 	```
