@@ -15,7 +15,19 @@ src/ArtGobblers.sol-732-        // The caller must own the gobbler they're feedi
 src/ArtGobblers.sol:733:        if(owner != msg.sender || !isApprovedForAll(owner, msg.sender) || !isERC1155 && getApproved(tokenId) != msg.sender) revert OwnerMismatch(owner);
 ```
 
-# 2. Remove duplicate word in documentation
+# 2. Use explicit 256-bit integer type whenever possible
+
+Before
+```
+src/ArtGobblers.sol:763:            uint(toDaysWadUnsafe(block.timestamp - getUserData[user].lastTimestamp))
+```
+
+After
+```
+src/ArtGobblers.sol:763:            uint256(toDaysWadUnsafe(block.timestamp - getUserData[user].lastTimestamp))
+```
+
+# 3. Remove duplicate word in documentation
 
 Before
 ```
