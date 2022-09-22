@@ -46,28 +46,44 @@ lib/solmate/src/auth/Owned.sol:20:        require(msg.sender == owner, "UNAUTHOR
 
 E.g. for the first occurrence
 
-**Before**
+**Code changes**
 ```
-src/ArtGobblers.sol:439:                require(getGobblerData[id].owner == msg.sender, "WRONG_FROM");
-```
-```
-forge test --match-test testMintLegendaryGobblerWithUnownedId --gas-report
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
-│ Function Name                            ┆ min             ┆ avg     ┆ median  ┆ max     ┆ # calls │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
-│ mintLegendaryGobbler                     ┆ 182111          ┆ 182111  ┆ 182111  ┆ 182111  ┆ 1       │
+diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
+index 0d413c0..fb09bcb 100644
+--- a/src/ArtGobblers.sol
++++ b/src/ArtGobblers.sol
+@@ -261,6 +261,7 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+     error OwnerMismatch(address owner);
+ 
+     error NoRemainingLegendaryGobblers();
++    error WrongFrom();
+     error CannotBurnLegendary(uint256 gobblerId);
+     error InsufficientGobblerAmount(uint256 cost);
+     error LegendaryAuctionNotStarted(uint256 gobblersLeft);
+@@ -434,7 +435,7 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+ 
+                 if (id >= FIRST_LEGENDARY_GOBBLER_ID) revert CannotBurnLegendary(id);
+ 
+-                require(getGobblerData[id].owner == msg.sender, "WRONG_FROM");
++                if (getGobblerData[id].owner != msg.sender) revert WrongFrom();
+ 
+                 burnedMultipleTotal += getGobblerData[id].emissionMultiple;
 ```
 
-**After**
+**Gas changes**
 ```
-src/ArtGobblers.sol:439:                if(getGobblerData[id].owner != msg.sender) revert WrongFrom();
-```
-```
-forge test --match-test testMintLegendaryGobblerWithUnownedId --gas-report
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
-│ Function Name                            ┆ min             ┆ avg     ┆ median  ┆ max     ┆ # calls │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
-│ mintLegendaryGobbler                     ┆ 182039          ┆ 182039  ┆ 182039  ┆ 182039  ┆ 1       │
+# Run before changes
+$ forge snapshot --ffi
+
+# Execute code changes
+
+# Run after changes
+$ forge snapshot --ffi --diff .gas-snapshot
+
+Test result: ok. 66 passed; 0 failed; finished in 2.36s
+...
+testMintLegendaryGobblerWithUnownedId() (gas: -41 (-0.000%))
+Overall gas change: -41 (-0.000%)
 ```
 
 The other findings are analogous.
@@ -83,7 +99,7 @@ src/ArtGobblers.sol:894:        delete getApproved[id];
 src/utils/token/PagesERC721.sol:122:        delete getApproved[id];
 ```
 
-**After**
+**Code changes**
 ```
 $ git diff src/
 
@@ -133,8 +149,7 @@ index 4bbca84..331a9fb 100644
 
 ```
 
-Gas changes:
-
+**Gas changes**
 ```
 # Run before changes
 $ forge snapshot --ffi
