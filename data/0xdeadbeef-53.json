@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "0xdeadbeef",
+  "address": "0x0af89c57c16da5befe2532370c88e41bc4648649",
+  "risk": "3",
+  "title": "ROUNDING INTEGER WILL CAUSE PRICE NOT FALLING LINEARLY",
+  "issueId": 53,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/53"
+}
