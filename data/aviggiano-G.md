@@ -1,4 +1,5 @@
-Replace `require(condition, "ERROR")` by `if(!condition) revert Error();` pattern for gas savings.
+# Replace `require(condition, "ERROR")` by `if(!condition) revert Error();` pattern for gas savings.
+
 List of affected pieces of code:
 
 ```
@@ -29,3 +30,27 @@ lib/VRGDAs/src/examples/LogisticToLinearNFT.sol:68:            require(msg.value
 lib/VRGDAs/src/VRGDA.sol:32:        require(decayConstant < 0, "NON_NEGATIVE_DECAY_CONSTANT");
 ```
 
+E.g. for the first occurrence
+### Before
+```
+src/ArtGobblers.sol:439:                require(getGobblerData[id].owner == msg.sender, "WRONG_FROM");
+```
+```
+forge test --match-test testMintLegendaryGobblerWithUnownedId --gas-report
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
+│ Function Name                            ┆ min             ┆ avg     ┆ median  ┆ max     ┆ # calls │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
+│ mintLegendaryGobbler                     ┆ 182111          ┆ 182111  ┆ 182111  ┆ 182111  ┆ 1       │
+```
+
+### After
+```
+src/ArtGobblers.sol:439:                if(getGobblerData[id].owner != msg.sender) revert WrongFrom();
+```
+```
+forge test --match-test testMintLegendaryGobblerWithUnownedId --gas-report
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
+│ Function Name                            ┆ min             ┆ avg     ┆ median  ┆ max     ┆ # calls │
+├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌┤
+│ mintLegendaryGobbler                     ┆ 182039          ┆ 182039  ┆ 182039  ┆ 182039  ┆ 1       │
+```
