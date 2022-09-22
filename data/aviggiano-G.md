@@ -1,6 +1,6 @@
 # Replace `require(condition, "ERROR")` by `if(!condition) revert Error();` pattern for gas savings.
 
-List of affected pieces of code:
+List of affected pieces of assets in scope:
 
 ```
 $ grep -rn 'require\s*(' src script lib/VRGDAs/src lib/goo-issuance/src
