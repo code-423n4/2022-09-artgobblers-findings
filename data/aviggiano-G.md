@@ -46,7 +46,7 @@ lib/solmate/src/auth/Owned.sol:20:        require(msg.sender == owner, "UNAUTHOR
 
 E.g. for the first occurrence
 
-##### Before
+**Before**
 ```
 src/ArtGobblers.sol:439:                require(getGobblerData[id].owner == msg.sender, "WRONG_FROM");
 ```
@@ -58,7 +58,7 @@ forge test --match-test testMintLegendaryGobblerWithUnownedId --gas-report
 │ mintLegendaryGobbler                     ┆ 182111          ┆ 182111  ┆ 182111  ┆ 182111  ┆ 1       │
 ```
 
-##### After
+**After**
 ```
 src/ArtGobblers.sol:439:                if(getGobblerData[id].owner != msg.sender) revert WrongFrom();
 ```
@@ -83,19 +83,53 @@ src/ArtGobblers.sol:894:        delete getApproved[id];
 src/utils/token/PagesERC721.sol:122:        delete getApproved[id];
 ```
 
-After
+**After**
 ```
-// src/ArtGobblers.sol
+$ git diff src/
 
-        require(
-            msg.sender == from ||
-                isApprovedForAll[from][msg.sender] ||
-                (msg.sender == getApproved[id] && ((getApproved[id] = address(0)) == address(0))),
-            "NOT_AUTHORIZED"
-        );
-
-// src/utils/token/PagesERC721.sol
-
+diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
+index 0d413c0..0ca71d8 100644
+--- a/src/ArtGobblers.sol
++++ b/src/ArtGobblers.sol
+@@ -887,12 +887,12 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+         require(to != address(0), "INVALID_RECIPIENT");
+ 
+         require(
+-            msg.sender == from || isApprovedForAll[from][msg.sender] || msg.sender == getApproved[id],
++            msg.sender == from ||
++                isApprovedForAll[from][msg.sender] ||
++                (msg.sender == getApproved[id] && ((getApproved[id] = address(0)) == address(0))),
+             "NOT_AUTHORIZED"
+         );
+ 
+-        delete getApproved[id];
+-
+         getGobblerData[id].owner = to;
+ 
+         unchecked {
+diff --git a/src/utils/token/PagesERC721.sol b/src/utils/token/PagesERC721.sol
+index 4bbca84..331a9fb 100644
+--- a/src/utils/token/PagesERC721.sol
++++ b/src/utils/token/PagesERC721.sol
+@@ -105,7 +105,9 @@ abstract contract PagesERC721 {
+         require(to != address(0), "INVALID_RECIPIENT");
+ 
+         require(
+-            msg.sender == from || isApprovedForAll(from, msg.sender) || msg.sender == getApproved[id],
++            msg.sender == from ||
++                isApprovedForAll(from, msg.sender) ||
++                (msg.sender == getApproved[id] && ((getApproved[id] = address(0)) == address(0))),
+             "NOT_AUTHORIZED"
+         );
+ 
+@@ -119,8 +121,6 @@ abstract contract PagesERC721 {
+ 
+         _ownerOf[id] = to;
+ 
+-        delete getApproved[id];
+-
+         emit Transfer(from, to, id);
+     }
 
 ```
 
@@ -114,8 +148,9 @@ $ forge snapshot --ffi --diff .gas-snapshot
 Test result: ok. 66 passed; 0 failed; finished in 2.76s
 ...
 testCanWithdraw() (gas: -3669 (-0.005%))
+testFeedingArt() (gas: -1827 (-0.007%))
 testGobblerBalancesAfterTransfer() (gas: -2293 (-0.009%))
 testEmissionMultipleUpdatesAfterTransfer() (gas: -2293 (-0.009%))
 testTransferGobbler() (gas: -2293 (-0.046%))
-Overall gas change: -10548 (-0.069%)
+Overall gas change: -12375 (-0.076%)
 ```
