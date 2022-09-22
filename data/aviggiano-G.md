@@ -1,4 +1,4 @@
-# Replace `require(condition, "ERROR")` by `if(!condition) revert Error();` pattern for gas savings.
+# 1. Replace `require(condition, "ERROR")` by `if(!condition) revert Error();` pattern for gas savings.
 
 List of affected assets in scope:
 
@@ -71,3 +71,51 @@ forge test --match-test testMintLegendaryGobblerWithUnownedId --gas-report
 ```
 
 The other findings are analogous.
+
+# 2. Only clear NFT approval storage for approved NFTs
+
+List of affected assets in scope:
+
+```
+$ git grep -n 'delete getApproved'
+
+src/ArtGobblers.sol:894:        delete getApproved[id];
+src/utils/token/PagesERC721.sol:122:        delete getApproved[id];
+```
+
+After
+```
+// src/ArtGobblers.sol
+
+        require(
+            msg.sender == from ||
+                isApprovedForAll[from][msg.sender] ||
+                (msg.sender == getApproved[id] && ((getApproved[id] = address(0)) == address(0))),
+            "NOT_AUTHORIZED"
+        );
+
+// src/utils/token/PagesERC721.sol
+
+
+```
+
+Gas changes:
+
+```
+# Run before changes
+$ forge snapshot --ffi
+
+# Execute code changes
+
+# Run after changes
+$ forge snapshot --ffi --diff .gas-snapshot
+
+# Output
+Test result: ok. 66 passed; 0 failed; finished in 2.76s
+...
+testCanWithdraw() (gas: -3669 (-0.005%))
+testGobblerBalancesAfterTransfer() (gas: -2293 (-0.009%))
+testEmissionMultipleUpdatesAfterTransfer() (gas: -2293 (-0.009%))
+testTransferGobbler() (gas: -2293 (-0.046%))
+Overall gas change: -10548 (-0.069%)
+```
