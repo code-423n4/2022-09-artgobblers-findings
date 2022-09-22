@@ -1,4 +1,4 @@
-# 1. Replace `require(condition, "ERROR")` by `if(!condition) revert Error();` pattern for gas savings.
+# 1. Replace `require(condition, "ERROR")` by `if(!condition) revert Error();` pattern
 
 List of affected assets in scope:
 
