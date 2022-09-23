@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "0x52",
+  "address": "0x522dffc539c264a8f7e0b91102e899b33f4dabc3",
+  "risk": "2",
+  "title": "ArtGobblers.sol#mintLegendaryGobbler contains token accounting error",
+  "issueId": 68,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/68"
+}
