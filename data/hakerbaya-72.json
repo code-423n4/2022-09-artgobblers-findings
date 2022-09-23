@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "hakerbaya",
+  "address": "0xd2bafa7f3ac35b38ca4a67e07cbbab1ac0f3796b",
+  "risk": "3",
+  "title": "Ability to transfer Fake NFT token using a malicious contract to make gobble function successfull.",
+  "issueId": 72,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/72"
+}
