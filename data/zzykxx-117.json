@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "zzykxx",
+  "address": "0x6d077768f365c00e58bafc356b5c4d855f3a3d4f",
+  "risk": "2",
+  "title": "When minting a legendary gobbler an user can lose on multipliers by mistake",
+  "issueId": 117,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/117"
+}
