@@ -36,3 +36,20 @@ With those changes, these evolutions in gas average report can be observe:
     upgradeRandProvider: 4804 -> 4868 (+64)
 
 *Most of the evolutions compensate each other but in total, taking into account the number of calls, this configuration is more interesting.*
+
+## [G-02] `external` function for the owner can be marked as `payable`.
+If a function is guaranteed to revert when called by a normal user, this function can be marked as `payable` to avoid the check to know if a payment is provided.
+
+2 instances:
+
+ - https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L560
+ - https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/utils/GobblerReserve.sol#L34
+
+Consider adding `payable` keyword.
+
+With those changes, these evolutions in gas average report can be observe:
+
+    ArtGobblers: Deployment :  4033627 -> 4197646 (+164019)
+    ArtGobblers: upgradeRandProvider: 4804 -> 4780 (-24)
+    GobblerReserve: Deployment: 251133 ->  256339 (+5206)
+    GobblerReserve: withdraw: 25227 -> 25203 (-24)
