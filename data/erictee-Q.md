@@ -57,3 +57,14 @@ src/utils/token/GobblersERC1155B.sol:L135    function _mint(
 src/utils/token/PagesERC721.sol:L173    function _mint(address to, uint256 id) internal {
 
 ```
+
+### [L-08] zero-address checks are missing
+
+
+#### Impact
+Zero-address checks are a best practice for input validation of critical address parameters. Accidental use of zero-addresses may result in exceptions, burn fees/tokens, or force redeployment of contracts.
+
+#### Findings:
+https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L316-L317
+https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/Goo.sol#L83-L84
+https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/Pages.sol#l181
