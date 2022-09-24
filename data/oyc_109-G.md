@@ -126,9 +126,6 @@ Use uint256(1) and uint256(2) for true/false instead
 The unchecked keyword is new in solidity version 0.8.0, so this only applies to that version or higher, which these instances are. This saves 30-40 gas per loop
 
 ```
-2022-09-artgobblers/src/ArtGobblers.sol::432 => for (uint256 i = 0; i < cost; ++i) {
-2022-09-artgobblers/src/ArtGobblers.sol::592 => for (uint256 i = 0; i < numGobblers; ++i) {
-2022-09-artgobblers/src/ArtGobblers.sol::605 => uint256 currentId = ++lastRevealedId;
 2022-09-artgobblers/src/Pages.sol::251 => for (uint256 i = 0; i < numPages; i++) _mint(community, ++lastMintedPageId);
 2022-09-artgobblers/src/utils/GobblerReserve.sol::37 => for (uint256 i = 0; i < ids.length; i++) {
 2022-09-artgobblers/src/utils/token/GobblersERC1155B.sol::114 => for (uint256 i = 0; i < owners.length; ++i) {
