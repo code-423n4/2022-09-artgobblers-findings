@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "RustyRabbit",
+  "address": "0x7f8f0ba2691f25689ca3ca9e06fae5a69f2c5498",
+  "risk": "3",
+  "title": "Direct transfer of ERC1155 tokens to the contract should be blocked by reverting `onERC1155Received()`",
+  "issueId": 137,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/137"
+}
