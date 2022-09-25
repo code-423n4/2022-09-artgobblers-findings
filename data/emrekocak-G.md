@@ -28,6 +28,8 @@ ___
 ## Not initializing `unit` variable to default value of zero  
   
 Instance includes:
+[`src/ArtGobblers.sol:432`](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L432)
+[`src/ArtGobblers.sol:592`](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L592)
 [`src/Pages.sol:251`](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/Pages.sol#L251)
 [`src/utils/GobblerReserve.sol:37`](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/utils/GobblerReserve.sol#L37)
 [`src/utils/token/GobblersERC721.sol:186`](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/utils/token/GobblersERC721.sol#L186)
