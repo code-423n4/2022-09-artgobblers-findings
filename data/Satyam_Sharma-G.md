@@ -8,7 +8,7 @@ remove bytes32...
 
 ISSUE 2.
 Use revert to save gas instead of using require...
-use custome error it is helpful in saving gas rather than using require statement!!!!!
+use custom error it is helpful in saving gas rather than using require statement!!!!!
 
 https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L885
 
