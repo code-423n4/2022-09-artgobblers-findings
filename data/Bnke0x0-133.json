@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "Bnke0x0",
+  "address": "0x1b8eaf5900941cfcc8323529040a48e129a28905",
+  "risk": "2",
+  "title": "An attacker can create a short put option order on an NFT that does not support ERC1155(like cryptopunk, MetaMask and etc..), and the user can fulfill the order, but cannot exercise the option",
+  "issueId": 133,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/133"
+}
