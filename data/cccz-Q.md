@@ -32,3 +32,9 @@ https://github.com/code-423n4/2022-09-artgobblers/blob/2ae644ace932271fb34399c1c
 The address to will receive the NFT when withdraw() is called. However, if to is a contract address that does not support ERC721, the NFT can be frozen in the contract.
 
 https://github.com/code-423n4/2022-09-artgobblers/blob/2ae644ace932271fb34399c1c0771aabae2e423c/src/utils/GobblerReserve.sol#L38-L39
+
+## [Low-05]  Users with the isApprovedForAll and getApproved permissions should also be able to call the gobble function
+
+Currently only the owner of a Gobbler can call the gobble function on that Gobbler, but users with the isApprovedForAll and getApproved permissions should also be able to call the gobble function on that Gobbler
+
+https://github.com/code-423n4/2022-09-artgobblers/blob/2ae644ace932271fb34399c1c0771aabae2e423c/src/ArtGobblers.sol#L723-L733
