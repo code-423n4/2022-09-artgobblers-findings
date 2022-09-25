@@ -37,3 +37,4 @@
         UNREVEALED_URI = _unrevealedUri;
 ```
 https://github.com/code-423n4/2022-09-artgobblers/blob/fb54f92ffcb0c13e72c84cde24c138866d9988e8/src/ArtGobblers.sol#L287-L321
+https://github.com/code-423n4/2022-09-artgobblers/blob/fb54f92ffcb0c13e72c84cde24c138866d9988e8/src/ArtGobblers.sol#L560
