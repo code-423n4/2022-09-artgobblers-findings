@@ -39,9 +39,15 @@ If THEY are paying for the minting of tokens and you expect buyers to be composi
 
 ## Page NFT do not have owner
 
-the Page NFT do not have owner, which means it cannot be listed on opensea or looksRare,
+the Page NFT do not have owner, which means it cannot be listed on opensea or looksRare as collection
 
 We recommand the project add owner for Page NFT.
+
+## ArtGobbler and Page NFT do not implement contractURI method
+
+https://docs.opensea.io/docs/contract-level-metadata
+
+We recommand the project add contractURI method to ERC721 or ERC1155 contract that returns a URL for the storefront-level metadata for your contract.
 
 ## function Gobble miss the check that if the msg.sender is approved by NFT owner
 
@@ -116,7 +122,7 @@ instead of
         }
 ```
 
-we recommand move ++currentNonLegenaryId before the event mission for better readability and conciseness.
+we recommand move ++currentNonLegenaryId before the event mission for better readability, conciseness and consistency.
 
 ```
        unchecked {
@@ -146,3 +152,17 @@ to
     delete getGobblerData[id];
     emit Transfer(msg.sender, address(0), id);
 ```
+
+## Use batch mint for page reserve minting instead of minting in the for loop
+
+https://github.com/code-423n4/2022-09-artgobblers/blob/d2087c5a8a6a4f1b9784520e7fe75afa3a9cbdbe/src/Pages.sol#L251
+
+instead of 
+
+```
+for (uint256 i = 0; i < numPages; i++) _mint(community, ++lastMintedPageId);
+```
+
+when minting page,
+
+we recommand the project to use batchMint function here.
