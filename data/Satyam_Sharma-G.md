@@ -13,3 +13,11 @@ use custome error it is helpful in saving gas rather than using require statemen
 https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L885
 
 https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L887 
+
+ISSUE 3.
+Refactor a modifier to call a local function instead of directly having the code in the 
+modifier, saving bytecode size and thereby deployment cost..
+
+https://github.com/transmissions11/solmate/blob/bff24e835192470ed38bf15dbed6084c2d723ace/src/auth/Owned.sol#L19
+
+reference: https://0xmacro.com/blog/solidity-gas-optimizations-cheat-sheet/ ..8. point
