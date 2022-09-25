@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "zdhu",
+  "address": "0xc0c57eb10fa32edef323238c02973f4dade43161",
+  "risk": "2",
+  "title": "`revealGobblers` is permanently unusable when the rand provider didn't call `acceptRandomSeed` once.",
+  "issueId": 141,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/141"
+}
