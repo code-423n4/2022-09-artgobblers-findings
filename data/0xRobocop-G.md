@@ -1,0 +1,4 @@
+The function mintLegendaryGobbler(uint256[] calldata gobblerIds) at [LoC 411](https://github.com/code-423n4/2022-09-artgobblers/blob/d2087c5a8a6a4f1b9784520e7fe75afa3a9cbdbe/src/ArtGobblers.sol#L411) from the ArtGobblers.sol contract is used to buy legendaryGobblers by burning some normal gobblers.
+
+At [LoC 441](https://github.com/code-423n4/2022-09-artgobblers/blob/d2087c5a8a6a4f1b9784520e7fe75afa3a9cbdbe/src/ArtGobblers.sol#L441) of the ArtGobblers contract  is when the burning happens by changing the owner of the gobbler to the zero address. But the gobblerData struct has other fields that can be converted to the default value in order to get gas refunds such as: [idx and emissionMultiple](https://github.com/code-423n4/2022-09-artgobblers/blob/d2087c5a8a6a4f1b9784520e7fe75afa3a9cbdbe/src/utils/token/GobblersERC721.sol#L34).
+
