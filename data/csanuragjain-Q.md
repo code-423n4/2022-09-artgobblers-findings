@@ -20,3 +20,14 @@ In approve function, approved user wont be allowed to call the approve function 
 
 Recommendation:
 Add getApproved[id]==msg.sender to the list of allowed user. Same goes for PagesERC721.sol
+
+## 2 step owner change
+
+Contract:
+https://github.com/transmissions11/solmate/blob/bff24e835192470ed38bf15dbed6084c2d723ace/src/auth/Owned.sol#L40
+
+Issue:
+In setOwner function, an incorrectly passed argument address will be set as admin of contract which will prohibit all function calls which are admin only. This can impact GobblerReserve (withdraw function), ArtGobblers (upgradeRandProvider)
+
+Recommendation:
+Kindly change this address change to a 2 step process (Pending admin, confirm admin) and also add checks for 0 address
