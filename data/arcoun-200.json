@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "arcoun",
+  "address": "0xc4a0fa56e054d96dc57d44ffcddf17c41ec6c558",
+  "risk": "2",
+  "title": "Invalid calculation of user's gobblersOwned during a Legendary Gobbler mint",
+  "issueId": 200,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/200"
+}
