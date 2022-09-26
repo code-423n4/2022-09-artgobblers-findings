@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "zzykxx",
+  "address": "0x6d077768f365c00e58bafc356b5c4d855f3a3d4f",
+  "risk": "2",
+  "title": "The reveal process could brick if `randProvider` stops working",
+  "issueId": 153,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/153"
+}
