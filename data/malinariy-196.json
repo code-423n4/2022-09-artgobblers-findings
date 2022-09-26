@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "malinariy",
+  "address": "0xa9a9ec6dd531597f9c6a0c2d57aacb011c0bda5f",
+  "risk": "2",
+  "title": "Gobbler, page and goo may be minted to non ERC721 receivers",
+  "issueId": 196,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/196"
+}
