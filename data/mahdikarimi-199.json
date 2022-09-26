@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "mahdikarimi",
+  "address": "0xaeaf140b72aef87a097b67797b711863833534ea",
+  "risk": "3",
+  "title": "Lack of address check for contract ownership changes",
+  "issueId": 199,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/199"
+}
