@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "yixxas",
+  "address": "0x9079426b034c524ebd6cac9cb78dbe8cb0749f4e",
+  "risk": "3",
+  "title": "`mintLegendaryGobbler()` will always revert when the cost of minting is past a certain threshold due to exceeding block gas limit",
+  "issueId": 151,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/151"
+}
