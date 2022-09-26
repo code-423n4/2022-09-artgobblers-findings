@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "catchup",
+  "address": "0xb159beeb1dea94440820f9a06a2f613974467e0e",
+  "risk": "2",
+  "title": "revealGobblers(uint256 numGobblers) is susceptible to DoS with block gas limit",
+  "issueId": 161,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/161"
+}
