@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "devtooligan",
+  "address": "0xe7aa7af667016837733f3ca3809bde04697730ef",
+  "risk": "2",
+  "title": "Chainlink malfunction can irrecoverably brick reveals",
+  "issueId": 150,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/150"
+}
