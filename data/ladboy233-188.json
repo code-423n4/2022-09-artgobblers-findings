@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "ladboy233",
+  "address": "0xe1faaeb0d29c9cf411cbd47daab14a21ebe266a4",
+  "risk": "3",
+  "title": "When minting legendary NFT, non-legendary NFTs are burned, but burned token approval is not revoked, burned NFT TokenURI still accessible after burning.",
+  "issueId": 188,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/188"
+}
