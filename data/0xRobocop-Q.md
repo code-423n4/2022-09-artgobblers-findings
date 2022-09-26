@@ -1,0 +1,3 @@
+Gobblers cannot gobble other gobblers [LoC 736](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L736) from the ArtGobblers contract. 
+
+But the function transferFrom at [LoC 880](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L880) from the ArtGobblers contract does not check that the "address to" parameter is not indeed the ArtGobblers contract.
