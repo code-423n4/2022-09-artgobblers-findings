@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "ladboy233",
+  "address": "0xe1faaeb0d29c9cf411cbd47daab14a21ebe266a4",
+  "risk": "3",
+  "title": "Goo balances does not start accumulating until the NFT is revealed when emissionMultiple is set so the owners of NFTs that get revealed early can accumulate an unfair amount GOO supply",
+  "issueId": 176,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/176"
+}
