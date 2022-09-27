@@ -30,5 +30,9 @@ https://github.com/code-423n4/2022-09-artgobblers/blob/d2087c5a8a6a4f1b9784520e7
 
 Files use pragma solidity >=0.8.0. This should be changed to a fixed pragma to ensure the compiler will run in the same way if the contracts are deployed on a newer solidity version
 
+4- It's a good practice to declare enums and structs at the top of the contract before functions 
+
+https://github.com/code-423n4/2022-09-artgobblers/blob/d2087c5a8a6a4f1b9784520e7fe75afa3a9cbdbe/src/ArtGobblers.sol#L804
+
 
 
