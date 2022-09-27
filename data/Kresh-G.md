@@ -225,7 +225,6 @@ index ccf5cd0..18b8471 100644
 ```
 
 ### MAKE POINTER TO ELEMENTS OF MAPPING IF THEY REPEAT
-Also check @audit comment here
 Inside the code:
 ```diff
 diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
@@ -344,6 +343,7 @@ index 0d413c0..fb52530 100644
 ```
 
 ### REPLACE TERNARY OPERATORS IN MOST CASES
+Also check @audit comment here
 Inside the code:
 ```diff
 diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
