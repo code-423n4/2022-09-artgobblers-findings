@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "0xf15ers",
+  "address": "0x1434b95234155DA830c20d02548aF22f14A38FbE",
+  "risk": "2",
+  "title": "Use `safeTransferFrom` for ERC721 too",
+  "issueId": 409,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/409"
+}
