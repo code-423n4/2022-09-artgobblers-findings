@@ -521,3 +521,94 @@ index 0d413c0..a950f06 100644
      event GobblerClaimed(address indexed user, uint256 indexed gobblerId);
      event GobblerPurchased(address indexed user, uint256 indexed gobblerId, uint256 price);
 ```
+
+### MAKE CONSTANTS PRIVATE
+Inside the code:
+```diff
+diff --git a/script/deploy/DeployRinkeby.s.sol b/script/deploy/DeployRinkeby.s.sol
+index 470f761..7095d54 100644
+--- a/script/deploy/DeployRinkeby.s.sol
++++ b/script/deploy/DeployRinkeby.s.sol
+@@ -10,9 +10,9 @@ contract DeployRinkeby is DeployBase {
+ 
+     uint256 public immutable mintStart = 1656369768;
+ 
+-    string public constant gobblerBaseUri = "https://testnet.ag.xyz/api/nfts/gobblers/";
+-    string public constant gobblerUnrevealedUri = "https://testnet.ag.xyz/api/nfts/unrevealed";
+-    string public constant pagesBaseUri = "https://testnet.ag.xyz/api/nfts/pages/";
++    string private constant gobblerBaseUri = "https://testnet.ag.xyz/api/nfts/gobblers/";
++    string private constant gobblerUnrevealedUri = "https://testnet.ag.xyz/api/nfts/unrevealed";
++    string private constant pagesBaseUri = "https://testnet.ag.xyz/api/nfts/pages/";
+ 
+     constructor()
+         DeployBase(
+diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
+index 0d413c0..16be54c 100644
+--- a/src/ArtGobblers.sol
++++ b/src/ArtGobblers.sol
+@@ -109,21 +109,21 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+     //////////////////////////////////////////////////////////////*/
+ 
+     /// @notice Maximum number of mintable gobblers.
+-    uint256 public constant MAX_SUPPLY = 10000;
++    uint256 private constant MAX_SUPPLY = 10000;
+ 
+     /// @notice Maximum amount of gobblers mintable via mintlist.
+-    uint256 public constant MINTLIST_SUPPLY = 2000;
++    uint256 private constant MINTLIST_SUPPLY = 2000;
+ 
+     /// @notice Maximum amount of mintable legendary gobblers.
+-    uint256 public constant LEGENDARY_SUPPLY = 10;
++    uint256 private constant LEGENDARY_SUPPLY = 10;
+ 
+     /// @notice Maximum amount of gobblers split between the reserves.
+     /// @dev Set to comprise 20% of the sum of goo mintable gobblers + reserved gobblers.
+-    uint256 public constant RESERVED_SUPPLY = (MAX_SUPPLY - MINTLIST_SUPPLY - LEGENDARY_SUPPLY) / 5;
++    uint256 private constant RESERVED_SUPPLY = (MAX_SUPPLY - MINTLIST_SUPPLY - LEGENDARY_SUPPLY) / 5;
+ 
+     /// @notice Maximum amount of gobblers that can be minted via VRGDA.
+     // prettier-ignore
+-    uint256 public constant MAX_MINTABLE = MAX_SUPPLY
++    uint256 private constant MAX_MINTABLE = MAX_SUPPLY
+         - MINTLIST_SUPPLY
+         - LEGENDARY_SUPPLY
+         - RESERVED_SUPPLY;
+@@ -174,14 +174,14 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+     //////////////////////////////////////////////////////////////*/
+ 
+     /// @notice Initial legendary gobbler auction price.
+-    uint256 public constant LEGENDARY_GOBBLER_INITIAL_START_PRICE = 69;
++    uint256 private constant LEGENDARY_GOBBLER_INITIAL_START_PRICE = 69;
+ 
+     /// @notice The last LEGENDARY_SUPPLY ids are reserved for legendary gobblers.
+-    uint256 public constant FIRST_LEGENDARY_GOBBLER_ID = MAX_SUPPLY - LEGENDARY_SUPPLY + 1;
++    uint256 private constant FIRST_LEGENDARY_GOBBLER_ID = MAX_SUPPLY - LEGENDARY_SUPPLY + 1;
+ 
+     /// @notice Legendary auctions begin each time a multiple of these many gobblers have been minted from goo.
+     /// @dev We add 1 to LEGENDARY_SUPPLY because legendary auctions begin only after the first interval.
+-    uint256 public constant LEGENDARY_AUCTION_INTERVAL = MAX_MINTABLE / (LEGENDARY_SUPPLY + 1);
++    uint256 private constant LEGENDARY_AUCTION_INTERVAL = MAX_MINTABLE / (LEGENDARY_SUPPLY + 1);
+ 
+     /// @notice Struct holding data required for legendary gobbler auctions.
+     struct LegendaryGobblerAuctionData {
+diff --git a/src/Pages.sol b/src/Pages.sol
+index 0d4ac88..8d2f730 100644
+--- a/src/Pages.sol
++++ b/src/Pages.sol
+@@ -119,13 +119,13 @@ contract Pages is PagesERC721, LogisticToLinearVRGDA {
+ 
+     /// @dev The day the switch from a logistic to translated linear VRGDA is targeted to occur.
+     /// @dev Represented as an 18 decimal fixed point number.
+-    int256 internal constant SWITCH_DAY_WAD = 233e18;
++    int256 private constant SWITCH_DAY_WAD = 233e18;
+ 
+     /// @notice The minimum amount of pages that must be sold for the VRGDA issuance
+     /// schedule to switch from logistic to the "post switch" translated linear formula.
+     /// @dev Computed off-chain by plugging SWITCH_DAY_WAD into the uninverted pacing formula.
+     /// @dev Represented as an 18 decimal fixed point number.
+-    int256 internal constant SOLD_BY_SWITCH_WAD = 8336.760939794622713006e18;
++    int256 private constant SOLD_BY_SWITCH_WAD = 8336.760939794622713006e18;
+ 
+     /*//////////////////////////////////////////////////////////////
+                                  EVENTS
+```
