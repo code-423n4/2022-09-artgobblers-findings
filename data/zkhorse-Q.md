@@ -66,6 +66,47 @@ https://github.com/code-423n4/2022-09-artgobblers/blob/d2087c5a8a6a4f1b9784520e7
 
 Since this wastes gas for the caller and emits a confusing event, consider checking for zero amounts in `addGoo` and `removeGoo`.
 
+Additionally, we found that calling `addGoo(0)` repeatedly and frequently at intervals of less than 1 day can cause a user's goo balance to be lower than expected. We didn't see a clear path to an exploit here, since the error penalizes rather than rewards the caller, but it is unusual behavior that may deserve a closer look. See the test below, which passes with `TIMESTEP_OK` and fails with `TIMESTEP_FAIL`.
+
+```solidity
+    /// @notice make sure that actions that trigger balance snapshotting do not affect total balance.
+    function testSnapshotDoesNotAffectBalanceFuzzed() public {
+        //mint one gobbler for each user
+        mintGobblerToAddress(users[0], 1);
+        mintGobblerToAddress(users[1], 1);
+        vm.warp(block.timestamp + 1 days);
+        //give user initial goo balance
+        vm.prank(address(gobblers));
+        goo.mintForGobblers(users[0], 100);
+        //reveal gobblers
+        bytes32 requestId = gobblers.requestRandomSeed();
+        uint256 randomness = 1022; // magic seed to ensure both gobblers have same multiplier
+        vrfCoordinator.callBackWithRandomness(requestId, randomness, address(randProvider));
+        gobblers.revealGobblers(2);
+        //make sure both gobblers have same multiple, and same starting balance
+        assertGt(gobblers.getUserEmissionMultiple(users[0]), 0);
+        assertEq(gobblers.getUserEmissionMultiple(users[0]), gobblers.getUserEmissionMultiple(users[1]));
+
+        assertEq(gobblers.gooBalance(users[0]), gobblers.gooBalance(users[1]));
+
+        uint256 TIMESTEP_OK = 1 days;
+        uint256 TIMESTEP_FAIL = 1 days - 1;
+        unchecked {
+            for (uint256 n = 0; n < 1000; n += 12) {
+                vm.warp(block.timestamp + TIMESTEP_OK);
+                vm.prank(users[0]);
+                gobblers.addGoo(0);
+                console.log("balance1 - balance0 =", gobblers.gooBalance(users[1]) - gobblers.gooBalance(users[0]));
+            }
+        }
+
+        // make sure users have equal balance
+        unchecked {
+            assertEq(0,  gobblers.gooBalance(users[1]) - gobblers.gooBalance(users[0]));
+        }
+    }
+```
+
 ### `ArtGobblers`: Gobbling ignores token approvals
 
 The caller of `ArtGobblers#gobble` must be the _owner_ of the Gobbler being fed:
