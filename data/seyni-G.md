@@ -30,7 +30,7 @@ https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/utils/token/Gobb
 
 ## [G-02] Cache Array Length Outside of Loop
 
-Reading array length at each iteration of a loop uses additionnal gas for every loop. Aditionnaly, `owners.length` is also used in a require statement of the same function in `GobblersERC1155B.sol` line 107, which make the caching of `owners.length` even more useful.
+Reading array length at each iteration of a loop uses additionnal gas every loop. Aditionnaly, `owners.length` is also used in a require statement of the same function in `GobblersERC1155B.sol` line 107, which make the caching of `owners.length` even more useful.
 
 ### Files links :
 
