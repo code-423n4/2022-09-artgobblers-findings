@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "ak1",
+  "address": "0xf7a08c2c341bde5e17103d4780d1b465011a2a31",
+  "risk": "2",
+  "title": "ArtGobblers.sol#L411 : mintLegendaryGobbler can be executed without gobblerIds also",
+  "issueId": 448,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/448"
+}
