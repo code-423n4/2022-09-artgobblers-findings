@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "CertoraInc",
+  "address": "0x09A9af114843218a7446929b1183eBec373B2827",
+  "risk": "2",
+  "title": "Gobblers can be transferred into the contract, leading to locked gobbler and to the contract accumulating virtual goo balance",
+  "issueId": 258,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/258"
+}
