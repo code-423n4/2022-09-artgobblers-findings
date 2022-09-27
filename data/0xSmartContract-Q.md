@@ -239,3 +239,46 @@ function gobble(
 
 **Recommendation:**
 Avoid using variables with the same name, including inherited in the same contract, if used, it must be specified in the NatSpec comments.
+
+## Suggestions
+
+[S-01] 
+Gobblers NFTs are "Art Gobblers themselves are fully animated ERC1155 NFTs." it is mentioned as ERC721 using GobblersERC721.sol file in the project, documents should be corrected
+
+[S-02] 
+The getTargetSaleTime function in the VRGDA.sol file does not have a body, the reason for this preference is not clear, at least it should broadcast br emit
+```js
+function getTargetSaleTime(int256 sold) public view virtual returns (int256);
+```
+
+[S-03] 
+For code readability, add real numbers as comments with "//" next to scientific notation.
+Recommendation;
+```js
+ GobblersERC721("Art Gobblers", "GOBBLER")
+        Owned(msg.sender)
+        LogisticVRGDA(
+            69.42e18, // Target price.                // 69420000000000000000
+            0.31e18, // Price decay percent.     // 310000000000000000
+            // Max gobblers mintable via VRGDA. 
+            toWadUnsafe(MAX_MINTABLE),
+            0.0023e18 // Time scale.                 // 2300000000000000
+```
+
+
+[S-04] 
+Natspec comments are missing the return tag, add it as in all other functions. [ArtGobblers.sol#L509](https://github.com/code-423n4/2022-09-artgobblers/blob/main/src/ArtGobblers.sol#L509)
+
+[S-05] 
+For code readability, make sure what the numbers look like below, at least specify "//" in comments
+Recommendation;
+```js
+MAX_SUPPLY       = 10000;
+MINTLIST_SUPPLY  = 2000;
+LEGENDARY_SUPPLY = 10;
+RESERVED_SUPPLY  = 1598 //(MAX_SUPPLY - MINTLIST_SUPPLY - LEGENDARY_SUPPLY) / 5;
+MAX_MINTABLE     = 6392 // MAX_SUPPLY- MINTLIST_SUPPLY- LEGENDARY_SUPPLY- RESERVED_SUPPLY;
+```
+
+[S-06] 
+ChainlinkV1RandProvider.sol file tests could not be seen, because it is an external call, rinkeby tests must be done and added to the project. The Virtual Test environment is insufficient for such tests.
