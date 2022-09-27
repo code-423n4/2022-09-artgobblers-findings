@@ -305,7 +305,7 @@ index cd21b1c..1220246 100644
              goo.mintForGobblers(addr, gobblers.gobblerPrice());
              vm.stopPrank();
 ```
-##Cycle in test
+## Cycle in test
 cost + 10 in each iteration take some gas
 ```
 diff --git a/test/ArtGobblers.t.sol b/test/ArtGobblers.t.sol
