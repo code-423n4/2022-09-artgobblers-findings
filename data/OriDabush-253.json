@@ -1,9 +1,0 @@
-{
-  "contest": 163,
-  "handle": "OriDabush",
-  "address": "0x4bcc7c54e4e8e9a563b92272a51bbfb5d233de32",
-  "risk": "3",
-  "title": "An attacker can front run the user's transaction to lower the price of the legendary gobbler",
-  "issueId": 253,
-  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/253"
-}
