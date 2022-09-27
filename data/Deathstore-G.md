@@ -1,17 +1,21 @@
-
-diff --git a/.gas-snapshot b/.gas-snapshot
-index c494841..9a11231 100644
---- a/.gas-snapshot
-+++ b/.gas-snapshot
-@@ -75,7 +75,7 @@ BenchmarksTest:testPagePrice() (gas: 9108)
- BenchmarksTest:testRemoveGoo() (gas: 31872)
- BenchmarksTest:testRevealGobblers() (gas: 2913008)
- BenchmarksTest:testTransferGobbler() (gas: 49062)
--GobblerReserveTest:testCanWithdraw() (gas: 763845)
-+GobblerReserveTest:testCanWithdraw() (gas: 763853)
- GooTest:testBurnAllowed() (gas: 56314)
- GooTest:testBurnNotAllowed() (gas: 56354)
- GooTest:testMintByAuthority() (gas: 53601)
+## Fixing .length in cycle
+Calling length in each iteration
+Better using .length out of for cycle
+```   
+diff --git a/src/utils/GobblerReserve.sol b/src/utils/GobblerReserve.sol
+index da32f9e..0f1565a 100644
+--- a/src/utils/GobblerReserve.sol
++++ b/src/utils/GobblerReserve.sol
+@@ -34,7 +34,8 @@ contract GobblerReserve is Owned {
+     function withdraw(address to, uint256[] calldata ids) external onlyOwner {
+         // This is quite inefficient, but it's okay because this is not a hot path.
+         unchecked {
+-            for (uint256 i = 0; i < ids.length; i++) {
++            uint256 length = ids.length;
++            for (uint256 i = 0; i < length; i++) {
+                 artGobblers.transferFrom(address(this), to, ids[i]);
+             }
+         } 
 diff --git a/src/utils/GobblerReserve.sol b/src/utils/GobblerReserve.sol
 index da32f9e..0f1565a 100644
 --- a/src/utils/GobblerReserve.sol
@@ -49,204 +53,10 @@ index ccf5cd0..18b8471 100644
                  balances[i] = balanceOf(owners[i], ids[i]);
              }
          }
-diff --git a/.gas-snapshot b/.gas-snapshot
-index c494841..9a11231 100644
---- a/.gas-snapshot
-+++ b/.gas-snapshot
-@@ -75,7 +75,7 @@ BenchmarksTest:testPagePrice() (gas: 9108)
- BenchmarksTest:testRemoveGoo() (gas: 31872)
- BenchmarksTest:testRevealGobblers() (gas: 2913008)
- BenchmarksTest:testTransferGobbler() (gas: 49062)
--GobblerReserveTest:testCanWithdraw() (gas: 763845)
-+GobblerReserveTest:testCanWithdraw() (gas: 763853)
- GooTest:testBurnAllowed() (gas: 56314)
- GooTest:testBurnNotAllowed() (gas: 56354)
- GooTest:testMintByAuthority() (gas: 53601)
-diff --git a/src/utils/GobblerReserve.sol b/src/utils/GobblerReserve.sol
-index da32f9e..0f1565a 100644
---- a/src/utils/GobblerReserve.sol
-+++ b/src/utils/GobblerReserve.sol
-@@ -34,7 +34,8 @@ contract GobblerReserve is Owned {
-     function withdraw(address to, uint256[] calldata ids) external onlyOwner {
-         // This is quite inefficient, but it's okay because this is not a hot path.
-         unchecked {
--            for (uint256 i = 0; i < ids.length; i++) {
-+            uint256 length = ids.length;
-+            for (uint256 i = 0; i < length; i++) {
-                 artGobblers.transferFrom(address(this), to, ids[i]);
-             }
-         }
-diff --git a/.gas-snapshot b/.gas-snapshot
-index c494841..e38bd43 100644
---- a/.gas-snapshot
-+++ b/.gas-snapshot
-@@ -1,62 +1,62 @@
--ArtGobblersTest:testCanMintMultipleReserved() (gas: 1363063)
--ArtGobblersTest:testCanMintPageFromVirtualBalance() (gas: 299517)
--ArtGobblersTest:testCanMintReserved() (gas: 670320)
--ArtGobblersTest:testCannotMintLegendaryWithLegendary() (gas: 78518641)
--ArtGobblersTest:testCannotMintPageWithInsufficientBalance() (gas: 217059)
--ArtGobblersTest:testCannotReuseSeedForReveal() (gas: 275715)
--ArtGobblersTest:testCannotRevealMoreGobblersThanRemainingToBeRevealed() (gas: 299793)
--ArtGobblersTest:testCantAddMoreGooThanOwned() (gas: 209640)
--ArtGobblersTest:testCantFeed1155As721() (gas: 1754349)
--ArtGobblersTest:testCantFeed721As1155() (gas: 235316)
--ArtGobblersTest:testCantFeedGobblers() (gas: 179190)
--ArtGobblersTest:testCantFeedUnownedArt() (gas: 140301)
--ArtGobblersTest:testCantMintTooFastReserved() (gas: 1239121)
--ArtGobblersTest:testCantMintTooFastReservedOneByOne() (gas: 6429888)
--ArtGobblersTest:testCantRemoveGoo() (gas: 210496)
--ArtGobblersTest:testCantSetRandomSeedWithoutRevealing() (gas: 286963)
-+ArtGobblersTest:testCanMintMultipleReserved() (gas: 1363003)
-+ArtGobblersTest:testCanMintPageFromVirtualBalance() (gas: 299511)
-+ArtGobblersTest:testCanMintReserved() (gas: 670288)
-+ArtGobblersTest:testCannotMintLegendaryWithLegendary() (gas: 78515677)
-+ArtGobblersTest:testCannotMintPageWithInsufficientBalance() (gas: 217053)
-+ArtGobblersTest:testCannotReuseSeedForReveal() (gas: 275700)
-+ArtGobblersTest:testCannotRevealMoreGobblersThanRemainingToBeRevealed() (gas: 299781)
-+ArtGobblersTest:testCantAddMoreGooThanOwned() (gas: 209628)
-+ArtGobblersTest:testCantFeed1155As721() (gas: 1754343)
-+ArtGobblersTest:testCantFeed721As1155() (gas: 235311)
-+ArtGobblersTest:testCantFeedGobblers() (gas: 179183)
-+ArtGobblersTest:testCantFeedUnownedArt() (gas: 140295)
-+ArtGobblersTest:testCantMintTooFastReserved() (gas: 1239076)
-+ArtGobblersTest:testCantMintTooFastReservedOneByOne() (gas: 6429564)
-+ArtGobblersTest:testCantRemoveGoo() (gas: 210484)
-+ArtGobblersTest:testCantSetRandomSeedWithoutRevealing() (gas: 286946)
- ArtGobblersTest:testCantgobbleToUnownedGobbler() (gas: 115187)
- ArtGobblersTest:testDoesNotAllowRevealingZero() (gas: 16278)
- ArtGobblersTest:testDoesNotRevertEarly() (gas: 7735)
- ArtGobblersTest:testDoesRevertWhenExpected() (gas: 10079)
--ArtGobblersTest:testEmissionMultipleUpdatesAfterTransfer() (gas: 253644)
--ArtGobblersTest:testFeeding1155() (gas: 1763713)
--ArtGobblersTest:testFeedingArt() (gas: 258468)
--ArtGobblersTest:testFeedingMultiple1155Copies() (gas: 1805578)
--ArtGobblersTest:testGobblerBalancesAfterTransfer() (gas: 254049)
--ArtGobblersTest:testGooAddition() (gas: 243272)
--ArtGobblersTest:testGooRemoval() (gas: 262382)
-+ArtGobblersTest:testEmissionMultipleUpdatesAfterTransfer() (gas: 253632)
-+ArtGobblersTest:testFeeding1155() (gas: 1763707)
-+ArtGobblersTest:testFeedingArt() (gas: 258464)
-+ArtGobblersTest:testFeedingMultiple1155Copies() (gas: 1805572)
-+ArtGobblersTest:testGobblerBalancesAfterTransfer() (gas: 254037)
-+ArtGobblersTest:testGooAddition() (gas: 243262)
-+ArtGobblersTest:testGooRemoval() (gas: 262370)
- ArtGobblersTest:testInitialGobblerPrice() (gas: 14640)
--ArtGobblersTest:testLegendaryGobblerFinalPrice() (gas: 75838529)
--ArtGobblersTest:testLegendaryGobblerMidPrice() (gas: 56917944)
--ArtGobblersTest:testLegendaryGobblerMinStartPrice() (gas: 75885780)
-+ArtGobblersTest:testLegendaryGobblerFinalPrice() (gas: 75835738)
-+ArtGobblersTest:testLegendaryGobblerMidPrice() (gas: 56915849)
-+ArtGobblersTest:testLegendaryGobblerMinStartPrice() (gas: 75882987)
- ArtGobblersTest:testLegendaryGobblerMintBeforeStart() (gas: 22126)
--ArtGobblersTest:testLegendaryGobblerPastFinalPrice() (gas: 71635852)
--ArtGobblersTest:testLegendaryGobblerTargetPrice() (gas: 37936155)
--ArtGobblersTest:testMintFreeLegendaryGobbler() (gas: 75872939)
--ArtGobblersTest:testMintFreeLegendaryGobblerPastInterval() (gas: 113792206)
-+ArtGobblersTest:testLegendaryGobblerPastFinalPrice() (gas: 71630620)
-+ArtGobblersTest:testLegendaryGobblerTargetPrice() (gas: 37934758)
-+ArtGobblersTest:testMintFreeLegendaryGobbler() (gas: 75870145)
-+ArtGobblersTest:testMintFreeLegendaryGobblerPastInterval() (gas: 113788018)
- ArtGobblersTest:testMintFromBalanceInsufficient() (gas: 23701)
- ArtGobblersTest:testMintFromGoo() (gas: 111224)
--ArtGobblersTest:testMintFromGooBalance() (gas: 252966)
-+ArtGobblersTest:testMintFromGooBalance() (gas: 252960)
- ArtGobblersTest:testMintFromMintlist() (gas: 108203)
- ArtGobblersTest:testMintFromMintlistBeforeMintingStarts() (gas: 13877)
- ArtGobblersTest:testMintInsufficientBalance() (gas: 22876)
--ArtGobblersTest:testMintLegendaryGobbler() (gas: 41075776)
--ArtGobblersTest:testMintLegendaryGobblerWithInsufficientCost() (gas: 40766132)
--ArtGobblersTest:testMintLegendaryGobblerWithSlippage() (gas: 41267419)
--ArtGobblersTest:testMintLegendaryGobblerWithUnownedId() (gas: 40922878)
--ArtGobblersTest:testMintLegendaryGobblersExpectedIds() (gas: 264182200)
-+ArtGobblersTest:testMintLegendaryGobbler() (gas: 41073875)
-+ArtGobblersTest:testMintLegendaryGobblerWithInsufficientCost() (gas: 40764568)
-+ArtGobblersTest:testMintLegendaryGobblerWithSlippage() (gas: 41265686)
-+ArtGobblersTest:testMintLegendaryGobblerWithUnownedId() (gas: 40921148)
-+ArtGobblersTest:testMintLegendaryGobblersExpectedIds() (gas: 264162931)
- ArtGobblersTest:testMintNotInMintlist() (gas: 11229)
- ArtGobblersTest:testMintPriceExceededMax() (gas: 72095)
- ArtGobblersTest:testMintReservedGobblersFailsWithNoMints() (gas: 32661)
--ArtGobblersTest:testMintedLegendaryURI() (gas: 75895832)
-+ArtGobblersTest:testMintedLegendaryURI() (gas: 75893038)
- ArtGobblersTest:testMintingFromMintlistTwiceFails() (gas: 107465)
--ArtGobblersTest:testMultiReveal() (gas: 8475477)
--ArtGobblersTest:testPricingBasic() (gas: 53959904)
--ArtGobblersTest:testRevealDelayInitialMint() (gas: 114733)
--ArtGobblersTest:testRevealDelayRecurring() (gas: 259136)
--ArtGobblersTest:testRevealedUri() (gas: 217542)
--ArtGobblersTest:testSimpleRewards() (gas: 218517)
--ArtGobblersTest:testSnapshotDoesNotAffectBalance() (gas: 395277)
-+ArtGobblersTest:testMultiReveal() (gas: 8475112)
-+ArtGobblersTest:testPricingBasic() (gas: 53957800)
-+ArtGobblersTest:testRevealDelayInitialMint() (gas: 114728)
-+ArtGobblersTest:testRevealDelayRecurring() (gas: 259122)
-+ArtGobblersTest:testRevealedUri() (gas: 217530)
-+ArtGobblersTest:testSimpleRewards() (gas: 218505)
-+ArtGobblersTest:testSnapshotDoesNotAffectBalance() (gas: 395256)
- ArtGobblersTest:testUnmintedLegendaryUri() (gas: 25309)
- ArtGobblersTest:testUnmintedUri() (gas: 13435)
- ArtGobblersTest:testUnrevealedUri() (gas: 117119)
-@@ -64,44 +64,44 @@ BenchmarksTest:testAddGoo() (gas: 31862)
- BenchmarksTest:testGobblerPrice() (gas: 8986)
- BenchmarksTest:testGooBalance() (gas: 11831)
- BenchmarksTest:testLegendaryGobblersPrice() (gas: 10005)
--BenchmarksTest:testMintCommunityPages() (gas: 58998)
-+BenchmarksTest:testMintCommunityPages() (gas: 58992)
- BenchmarksTest:testMintGobbler() (gas: 58811)
- BenchmarksTest:testMintGobblerUsingVirtualBalance() (gas: 49718)
--BenchmarksTest:testMintLegendaryGobbler() (gas: 476972)
-+BenchmarksTest:testMintLegendaryGobbler() (gas: 476636)
- BenchmarksTest:testMintPage() (gas: 58812)
- BenchmarksTest:testMintPageUsingVirtualBalance() (gas: 57854)
--BenchmarksTest:testMintReservedGobblers() (gas: 105761)
-+BenchmarksTest:testMintReservedGobblers() (gas: 105749)
- BenchmarksTest:testPagePrice() (gas: 9108)
- BenchmarksTest:testRemoveGoo() (gas: 31872)
--BenchmarksTest:testRevealGobblers() (gas: 2913008)
-+BenchmarksTest:testRevealGobblers() (gas: 2912705)
- BenchmarksTest:testTransferGobbler() (gas: 49062)
--GobblerReserveTest:testCanWithdraw() (gas: 763845)
-+GobblerReserveTest:testCanWithdraw() (gas: 763802)
- GooTest:testBurnAllowed() (gas: 56314)
- GooTest:testBurnNotAllowed() (gas: 56354)
- GooTest:testMintByAuthority() (gas: 53601)
- GooTest:testMintByNonAuthority() (gas: 13113)
- GooTest:testSetPages() (gas: 64071)
- OptimizationsTest:testFuzzCurrentIdMultipleBranchlessOptimization(uint256) (runs: 256, μ: 408, ~: 423)
--PagesTest:testCanMintCommunity() (gas: 651820)
--PagesTest:testCanMintMultipleCommunity() (gas: 1236901)
--PagesTest:testCantMintTooFastCommunity() (gas: 1175310)
--PagesTest:testCantMintTooFastCommunityOneByOne() (gas: 5929636)
-+PagesTest:testCanMintCommunity() (gas: 651792)
-+PagesTest:testCanMintMultipleCommunity() (gas: 1236848)
-+PagesTest:testCantMintTooFastCommunity() (gas: 1175264)
-+PagesTest:testCantMintTooFastCommunityOneByOne() (gas: 5929369)
- PagesTest:testInsufficientBalance() (gas: 20641)
- PagesTest:testMintBeforeSetMint() (gas: 20654)
- PagesTest:testMintBeforeStart() (gas: 11878)
- PagesTest:testMintCommunityPagesFailsWithNoMints() (gas: 30550)
- PagesTest:testMintPriceExceededMax() (gas: 69364)
--PagesTest:testPagePricingPricingAfterSwitch() (gas: 361305984)
--PagesTest:testPagePricingPricingBeforeSwitch() (gas: 224772592)
-+PagesTest:testPagePricingPricingAfterSwitch() (gas: 361277544)
-+PagesTest:testPagePricingPricingBeforeSwitch() (gas: 224764017)
- PagesTest:testRegularMint() (gas: 108798)
- PagesTest:testSwitchSmoothness() (gas: 13072)
- PagesTest:testTargetPrice() (gas: 14671)
- RandProviderTest:testOnlyGobblersCanRequestRandomness() (gas: 8223)
--RandProviderTest:testRandomnessIsCorrectlyRequested() (gas: 167211)
--RandProviderTest:testRandomnessIsFulfilled() (gas: 175668)
--RandProviderTest:testRandomnessIsNotUpgradableWithPendingSeed() (gas: 507049)
-+RandProviderTest:testRandomnessIsCorrectlyRequested() (gas: 167205)
-+RandProviderTest:testRandomnessIsFulfilled() (gas: 175662)
-+RandProviderTest:testRandomnessIsNotUpgradableWithPendingSeed() (gas: 507043)
- RandProviderTest:testRandomnessIsOnlyUpgradableByOwner() (gas: 351791)
--RandProviderTest:testRandomnessIsUpgradable() (gas: 460201)
-+RandProviderTest:testRandomnessIsUpgradable() (gas: 460195)
- VRGDAsTest:testFailOverflowForBeyondLimitGobblers(uint256,uint256) (runs: 256, μ: 10288, ~: 10288)
- VRGDAsTest:testGobblerPriceStrictlyIncreasesForMostGobblers() (gas: 4073280)
- VRGDAsTest:testNoOverflowForAllGobblers(uint256,uint256) (runs: 256, μ: 11196, ~: 11196)
+```
+## Fixing of using != instead of <
+!= is better than > in some cases
+```
 diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
 index 0d413c0..6edb788 100644
 --- a/src/ArtGobblers.sol
@@ -494,19 +304,10 @@ index cd21b1c..1220246 100644
              vm.startPrank(address(gobblers));
              goo.mintForGobblers(addr, gobblers.gobblerPrice());
              vm.stopPrank();
-diff --git a/.gas-snapshot b/.gas-snapshot
-index c494841..9bb50a4 100644
---- a/.gas-snapshot
-+++ b/.gas-snapshot
-@@ -42,7 +42,7 @@ ArtGobblersTest:testMintFromMintlistBeforeMintingStarts() (gas: 13877)
- ArtGobblersTest:testMintInsufficientBalance() (gas: 22876)
- ArtGobblersTest:testMintLegendaryGobbler() (gas: 41075776)
- ArtGobblersTest:testMintLegendaryGobblerWithInsufficientCost() (gas: 40766132)
--ArtGobblersTest:testMintLegendaryGobblerWithSlippage() (gas: 41267419)
-+ArtGobblersTest:testMintLegendaryGobblerWithSlippage() (gas: 41249420)
- ArtGobblersTest:testMintLegendaryGobblerWithUnownedId() (gas: 40922878)
- ArtGobblersTest:testMintLegendaryGobblersExpectedIds() (gas: 264182200)
- ArtGobblersTest:testMintNotInMintlist() (gas: 11229)
+```
+##Cycle in test
+cost + 10 in each iteration take some gas
+```
 diff --git a/test/ArtGobblers.t.sol b/test/ArtGobblers.t.sol
 index 174d7b9..1c27324 100644
 --- a/test/ArtGobblers.t.sol
@@ -535,6 +336,11 @@ index 174d7b9..1c27324 100644
              assertEq(gobblers.ownerOf(curId), users[0]);
          }
      }
+```
+## Incerements/Decrements
+++x is better than x += 1
+some cases in code:
+```
 diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
 index 0d413c0..009ca7f 100644
 --- a/src/ArtGobblers.sol
@@ -565,122 +371,33 @@ index 0d413c0..009ca7f 100644
          }
  
          emit Transfer(from, to, id);
-diff --git a/.gas-snapshot b/.gas-snapshot
-index c494841..5a794bb 100644
---- a/.gas-snapshot
-+++ b/.gas-snapshot
-@@ -1,79 +1,79 @@
- ArtGobblersTest:testCanMintMultipleReserved() (gas: 1363063)
--ArtGobblersTest:testCanMintPageFromVirtualBalance() (gas: 299517)
-+ArtGobblersTest:testCanMintPageFromVirtualBalance() (gas: 299520)
- ArtGobblersTest:testCanMintReserved() (gas: 670320)
--ArtGobblersTest:testCannotMintLegendaryWithLegendary() (gas: 78518641)
--ArtGobblersTest:testCannotMintPageWithInsufficientBalance() (gas: 217059)
--ArtGobblersTest:testCannotReuseSeedForReveal() (gas: 275715)
-+ArtGobblersTest:testCannotMintLegendaryWithLegendary() (gas: 78518528)
-+ArtGobblersTest:testCannotMintPageWithInsufficientBalance() (gas: 217057)
-+ArtGobblersTest:testCannotReuseSeedForReveal() (gas: 275713)
- ArtGobblersTest:testCannotRevealMoreGobblersThanRemainingToBeRevealed() (gas: 299793)
--ArtGobblersTest:testCantAddMoreGooThanOwned() (gas: 209640)
-+ArtGobblersTest:testCantAddMoreGooThanOwned() (gas: 209638)
- ArtGobblersTest:testCantFeed1155As721() (gas: 1754349)
- ArtGobblersTest:testCantFeed721As1155() (gas: 235316)
- ArtGobblersTest:testCantFeedGobblers() (gas: 179190)
- ArtGobblersTest:testCantFeedUnownedArt() (gas: 140301)
- ArtGobblersTest:testCantMintTooFastReserved() (gas: 1239121)
- ArtGobblersTest:testCantMintTooFastReservedOneByOne() (gas: 6429888)
--ArtGobblersTest:testCantRemoveGoo() (gas: 210496)
--ArtGobblersTest:testCantSetRandomSeedWithoutRevealing() (gas: 286963)
-+ArtGobblersTest:testCantRemoveGoo() (gas: 210494)
-+ArtGobblersTest:testCantSetRandomSeedWithoutRevealing() (gas: 286960)
- ArtGobblersTest:testCantgobbleToUnownedGobbler() (gas: 115187)
- ArtGobblersTest:testDoesNotAllowRevealingZero() (gas: 16278)
- ArtGobblersTest:testDoesNotRevertEarly() (gas: 7735)
- ArtGobblersTest:testDoesRevertWhenExpected() (gas: 10079)
--ArtGobblersTest:testEmissionMultipleUpdatesAfterTransfer() (gas: 253644)
-+ArtGobblersTest:testEmissionMultipleUpdatesAfterTransfer() (gas: 253642)
- ArtGobblersTest:testFeeding1155() (gas: 1763713)
- ArtGobblersTest:testFeedingArt() (gas: 258468)
- ArtGobblersTest:testFeedingMultiple1155Copies() (gas: 1805578)
--ArtGobblersTest:testGobblerBalancesAfterTransfer() (gas: 254049)
--ArtGobblersTest:testGooAddition() (gas: 243272)
--ArtGobblersTest:testGooRemoval() (gas: 262382)
-+ArtGobblersTest:testGobblerBalancesAfterTransfer() (gas: 254047)
-+ArtGobblersTest:testGooAddition() (gas: 243274)
-+ArtGobblersTest:testGooRemoval() (gas: 262385)
- ArtGobblersTest:testInitialGobblerPrice() (gas: 14640)
- ArtGobblersTest:testLegendaryGobblerFinalPrice() (gas: 75838529)
- ArtGobblersTest:testLegendaryGobblerMidPrice() (gas: 56917944)
--ArtGobblersTest:testLegendaryGobblerMinStartPrice() (gas: 75885780)
-+ArtGobblersTest:testLegendaryGobblerMinStartPrice() (gas: 75885778)
- ArtGobblersTest:testLegendaryGobblerMintBeforeStart() (gas: 22126)
- ArtGobblersTest:testLegendaryGobblerPastFinalPrice() (gas: 71635852)
- ArtGobblersTest:testLegendaryGobblerTargetPrice() (gas: 37936155)
--ArtGobblersTest:testMintFreeLegendaryGobbler() (gas: 75872939)
--ArtGobblersTest:testMintFreeLegendaryGobblerPastInterval() (gas: 113792206)
-+ArtGobblersTest:testMintFreeLegendaryGobbler() (gas: 75872936)
-+ArtGobblersTest:testMintFreeLegendaryGobblerPastInterval() (gas: 113792204)
- ArtGobblersTest:testMintFromBalanceInsufficient() (gas: 23701)
- ArtGobblersTest:testMintFromGoo() (gas: 111224)
--ArtGobblersTest:testMintFromGooBalance() (gas: 252966)
-+ArtGobblersTest:testMintFromGooBalance() (gas: 252969)
- ArtGobblersTest:testMintFromMintlist() (gas: 108203)
- ArtGobblersTest:testMintFromMintlistBeforeMintingStarts() (gas: 13877)
- ArtGobblersTest:testMintInsufficientBalance() (gas: 22876)
--ArtGobblersTest:testMintLegendaryGobbler() (gas: 41075776)
--ArtGobblersTest:testMintLegendaryGobblerWithInsufficientCost() (gas: 40766132)
--ArtGobblersTest:testMintLegendaryGobblerWithSlippage() (gas: 41267419)
--ArtGobblersTest:testMintLegendaryGobblerWithUnownedId() (gas: 40922878)
--ArtGobblersTest:testMintLegendaryGobblersExpectedIds() (gas: 264182200)
-+ArtGobblersTest:testMintLegendaryGobbler() (gas: 41071964)
-+ArtGobblersTest:testMintLegendaryGobblerWithInsufficientCost() (gas: 40766022)
-+ArtGobblersTest:testMintLegendaryGobblerWithSlippage() (gas: 41263608)
-+ArtGobblersTest:testMintLegendaryGobblerWithUnownedId() (gas: 40919125)
-+ArtGobblersTest:testMintLegendaryGobblersExpectedIds() (gas: 264182170)
- ArtGobblersTest:testMintNotInMintlist() (gas: 11229)
- ArtGobblersTest:testMintPriceExceededMax() (gas: 72095)
- ArtGobblersTest:testMintReservedGobblersFailsWithNoMints() (gas: 32661)
--ArtGobblersTest:testMintedLegendaryURI() (gas: 75895832)
-+ArtGobblersTest:testMintedLegendaryURI() (gas: 75895829)
- ArtGobblersTest:testMintingFromMintlistTwiceFails() (gas: 107465)
--ArtGobblersTest:testMultiReveal() (gas: 8475477)
-+ArtGobblersTest:testMultiReveal() (gas: 8475397)
- ArtGobblersTest:testPricingBasic() (gas: 53959904)
- ArtGobblersTest:testRevealDelayInitialMint() (gas: 114733)
--ArtGobblersTest:testRevealDelayRecurring() (gas: 259136)
--ArtGobblersTest:testRevealedUri() (gas: 217542)
--ArtGobblersTest:testSimpleRewards() (gas: 218517)
--ArtGobblersTest:testSnapshotDoesNotAffectBalance() (gas: 395277)
-+ArtGobblersTest:testRevealDelayRecurring() (gas: 259135)
-+ArtGobblersTest:testRevealedUri() (gas: 217540)
-+ArtGobblersTest:testSimpleRewards() (gas: 218515)
-+ArtGobblersTest:testSnapshotDoesNotAffectBalance() (gas: 395293)
- ArtGobblersTest:testUnmintedLegendaryUri() (gas: 25309)
- ArtGobblersTest:testUnmintedUri() (gas: 13435)
- ArtGobblersTest:testUnrevealedUri() (gas: 117119)
--BenchmarksTest:testAddGoo() (gas: 31862)
-+BenchmarksTest:testAddGoo() (gas: 31867)
- BenchmarksTest:testGobblerPrice() (gas: 8986)
- BenchmarksTest:testGooBalance() (gas: 11831)
- BenchmarksTest:testLegendaryGobblersPrice() (gas: 10005)
- BenchmarksTest:testMintCommunityPages() (gas: 58998)
- BenchmarksTest:testMintGobbler() (gas: 58811)
--BenchmarksTest:testMintGobblerUsingVirtualBalance() (gas: 49718)
--BenchmarksTest:testMintLegendaryGobbler() (gas: 476972)
-+BenchmarksTest:testMintGobblerUsingVirtualBalance() (gas: 49723)
-+BenchmarksTest:testMintLegendaryGobbler() (gas: 473272)
- BenchmarksTest:testMintPage() (gas: 58812)
--BenchmarksTest:testMintPageUsingVirtualBalance() (gas: 57854)
-+BenchmarksTest:testMintPageUsingVirtualBalance() (gas: 57859)
- BenchmarksTest:testMintReservedGobblers() (gas: 105761)
- BenchmarksTest:testPagePrice() (gas: 9108)
--BenchmarksTest:testRemoveGoo() (gas: 31872)
--BenchmarksTest:testRevealGobblers() (gas: 2913008)
-+BenchmarksTest:testRemoveGoo() (gas: 31877)
-+BenchmarksTest:testRevealGobblers() (gas: 2912803)
- BenchmarksTest:testTransferGobbler() (gas: 49062)
- GobblerReserveTest:testCanWithdraw() (gas: 763845)
- GooTest:testBurnAllowed() (gas: 56314)
+```
+## Ternary operator
+In some cases it's better to use if then else condition instead of ternary operators 
+```
+diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
+index 0d413c0..d545015 100644
+--- a/src/ArtGobblers.sol
++++ b/src/ArtGobblers.sol
+             // New start price is the max of LEGENDARY_GOBBLER_INITIAL_START_PRICE and cost * 2.
+             legendaryGobblerAuctionData.startPrice = uint120(
+@@ -612,10 +614,9 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+                 //////////////////////////////////////////////////////////////*/
+ 
+                 // Get the index of the swap id.
+-                uint64 swapIndex = getGobblerData[swapId].idx == 0
+-                    ? uint64(swapId) // Hasn't been shuffled before.
+-                    : getGobblerData[swapId].idx; // Shuffled before.
+-
++                uint64 swapIndex = uint64(swapId);
++                if (getGobblerData[swapId].idx == 0) {}
++                else {swapIndex =  getGobblerData[swapId].idx;}
+                 // Get the owner of the current id.
+                 address currentIdOwner = getGobblerData[currentId].owner;
+```
+## New storage
+creating a new pointer instead of x[i] construct
+```
 diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
 index 0d413c0..d545015 100644
 --- a/src/ArtGobblers.sol
@@ -720,22 +437,6 @@ index 0d413c0..d545015 100644
              // We subtract the amount of gobblers burned, and then add 1 to factor in the new legendary.
 -            getUserData[msg.sender].gobblersOwned = uint32(getUserData[msg.sender].gobblersOwned - cost + 1);
 +            new_pointer_.gobblersOwned = uint32(new_pointer_.gobblersOwned - cost + 1);
- 
-             // New start price is the max of LEGENDARY_GOBBLER_INITIAL_START_PRICE and cost * 2.
-             legendaryGobblerAuctionData.startPrice = uint120(
-@@ -612,10 +614,9 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
-                 //////////////////////////////////////////////////////////////*/
- 
-                 // Get the index of the swap id.
--                uint64 swapIndex = getGobblerData[swapId].idx == 0
--                    ? uint64(swapId) // Hasn't been shuffled before.
--                    : getGobblerData[swapId].idx; // Shuffled before.
--
-+                uint64 swapIndex = uint64(swapId);
-+                if (getGobblerData[swapId].idx == 0) {}
-+                else {swapIndex =  getGobblerData[swapId].idx;}
-                 // Get the owner of the current id.
-                 address currentIdOwner = getGobblerData[currentId].owner;
  
 @@ -646,8 +647,9 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
                  }
@@ -779,3 +480,4 @@ index 0d413c0..d545015 100644
  
          emit GooBalanceUpdated(user, updatedBalance);
      }
+```
