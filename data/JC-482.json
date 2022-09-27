@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "JC",
+  "address": "0xfc06b4c7b226c0be3766656fe4165592d9e7749f",
+  "risk": "3",
+  "title": "Some real-world NFT tokens may support both ERC721 and ERC1155 standards, which may break gobble ()",
+  "issueId": 482,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/482"
+}
