@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "Funen",
+  "address": "0x1b4cad2cb2ad1b4df797aacf046576a8d75acd45",
+  "risk": "2",
+  "title": "Use safeTransferFrom instead of transferFrom for ERC721 transfers",
+  "issueId": 330,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/330"
+}
