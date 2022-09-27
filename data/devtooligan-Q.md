@@ -79,5 +79,5 @@ None of the fixed bugs were deemed to directly effect the ArtGobblers contracts.
 
 **Recommendation**: 
 
-It is recommended to upgrade to the latest version of Solidity, or else take a more conservative approach and use an older version such as 0.8.4 which includes many needed features, but has been around longer and can be deemed more stable.
+It is recommended to upgrade to the latest version of Solidity, or else take a more conservative approach and use an older version such as 0.8.4 which includes many needed features (but possibly less optimizations), but has been around longer and can be deemed more stable.
 
