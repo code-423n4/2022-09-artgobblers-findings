@@ -5,6 +5,7 @@
 3. There can be more than 1 reveal per 24 hours
 4. Truncation at 120 bits instead of 128
 5. The idx of legendary gobblers is always 0
+6. Floating Pragma
 
 ## [1] Lack of a 2-step ownership transfer
 
@@ -33,3 +34,6 @@ At [ArtGobblers.sol#L535](https://github.com/artgobblers/art-gobblers/blob/maste
 ## [5] The idx of legendary gobblers is always 0
 
 The function `mintLegendaryGobbler()` never sets the idx of the minted legendary gobbler.
+
+## [6] Floating Pragma
+Most of the in-scope contracts require solidity compiler to be `>=0.8.0`, as per [SWC](https://swcregistry.io/docs/SWC-103) consider using a fixed compiler version.
