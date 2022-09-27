@@ -27,7 +27,19 @@ there are some more `require()` function inside `GobblersERC721.sol`, `GobblersE
 _A common gas optimization which sometimes it miss to look up_
 
 
-There are some `i++` being used everywhere across contracts.
+There are some `i++` being used in some contracts
+
+Pages.sol:L251
+```
+            for (uint256 i = 0; i < numPages; i++) _mint(community, ++lastMintedPageId);
+```
+
+GobblerReserve.sol:L37
+```
+            for (uint256 i = 0; i < ids.length; i++) {
+                artGobblers.transferFrom(address(this), to, ids[i]);
+            }
+```
 
 Pre-increments and pre-decrements are cheaper.
 
