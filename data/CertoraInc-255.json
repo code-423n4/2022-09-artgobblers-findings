@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "CertoraInc",
+  "address": "0x09A9af114843218a7446929b1183eBec373B2827",
+  "risk": "2",
+  "title": "Double addition of the new gobbler to the balance record messes up accounting",
+  "issueId": 255,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/255"
+}
