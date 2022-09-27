@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "rbserver",
+  "address": "0x4bd9605a3e546f3400df2c2be7b1c775aeea56bd",
+  "risk": "2",
+  "title": "Deployer of `ArtGobblers` contract, who becomes compromised or malicious, can call `upgradeRandProvider` function to make the system useless",
+  "issueId": 295,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/295"
+}
