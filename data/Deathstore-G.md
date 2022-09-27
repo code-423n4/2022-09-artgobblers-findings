@@ -372,29 +372,6 @@ index 0d413c0..009ca7f 100644
  
          emit Transfer(from, to, id);
 ```
-## Ternary operator
-In some cases it's better to use if then else condition instead of ternary operators 
-```
-diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
-index 0d413c0..d545015 100644
---- a/src/ArtGobblers.sol
-+++ b/src/ArtGobblers.sol
-             // New start price is the max of LEGENDARY_GOBBLER_INITIAL_START_PRICE and cost * 2.
-             legendaryGobblerAuctionData.startPrice = uint120(
-@@ -612,10 +614,9 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
-                 //////////////////////////////////////////////////////////////*/
- 
-                 // Get the index of the swap id.
--                uint64 swapIndex = getGobblerData[swapId].idx == 0
--                    ? uint64(swapId) // Hasn't been shuffled before.
--                    : getGobblerData[swapId].idx; // Shuffled before.
--
-+                uint64 swapIndex = uint64(swapId);
-+                if (getGobblerData[swapId].idx == 0) {}
-+                else {swapIndex =  getGobblerData[swapId].idx;}
-                 // Get the owner of the current id.
-                 address currentIdOwner = getGobblerData[currentId].owner;
-```
 ## New storage
 creating a new pointer instead of x[i] construct
 ```
@@ -480,4 +457,65 @@ index 0d413c0..d545015 100644
  
          emit GooBalanceUpdated(user, updatedBalance);
      }
+```
+## Ternary operator
+In some cases it's better to use if then else condition instead of ternary operators 
+```
+diff --git a/src/ArtGobblers.sol b/src/ArtGobblers.sol
+index 0d413c0..9113139 100644
+--- a/src/ArtGobblers.sol
++++ b/src/ArtGobblers.sol
+@@ -376,9 +376,10 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+ 
+         // Decrement the user's goo balance by the current
+         // price, either from virtual balance or ERC20 balance.
+-        useVirtualBalance
+-            ? updateUserGooBalance(msg.sender, currentPrice, GooBalanceUpdateType.DECREASE)
+-            : goo.burnForGobblers(msg.sender, currentPrice);
++        if (useVirtualBalance) 
++            updateUserGooBalance(msg.sender, currentPrice, GooBalanceUpdateType.DECREASE);
++        else 
++            goo.burnForGobblers(msg.sender, currentPrice);
+ 
+         unchecked {
+             ++numMintedFromGoo; // Overflow should be impossible due to the supply cap.
+@@ -612,17 +613,17 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+                 //////////////////////////////////////////////////////////////*/
+ 
+                 // Get the index of the swap id.
+-                uint64 swapIndex = getGobblerData[swapId].idx == 0
+-                    ? uint64(swapId) // Hasn't been shuffled before.
+-                    : getGobblerData[swapId].idx; // Shuffled before.
++                uint64 swapIndex = uint64(swapId);
++                if (getGobblerData[swapId].idx == 0) {} // Hasn't been shuffled before.
++                else swapIndex = getGobblerData[swapId].idx; // Shuffled before.
+ 
+                 // Get the owner of the current id.
+                 address currentIdOwner = getGobblerData[currentId].owner;
+ 
+                 // Get the index of the current id.
+-                uint64 currentIndex = getGobblerData[currentId].idx == 0
+-                    ? uint64(currentId) // Hasn't been shuffled before.
+-                    : getGobblerData[currentId].idx; // Shuffled before.
++                uint64 currentIndex = uint64(currentId);
++                if (getGobblerData[currentId].idx == 0 ){}
++                else    currentIndex = getGobblerData[currentId].idx; // Shuffled before.
+ 
+                 /*//////////////////////////////////////////////////////////////
+                                   SWAP INDICES AND SET MULTIPLE
+@@ -817,9 +818,11 @@ contract ArtGobblers is GobblersERC721, LogisticVRGDA, Owned, ERC1155TokenReceiv
+     ) internal {
+         // Will revert due to underflow if we're decreasing by more than the user's current balance.
+         // Don't need to do checked addition in the increase case, but we do it anyway for convenience.
+-        uint256 updatedBalance = updateType == GooBalanceUpdateType.INCREASE
+-            ? gooBalance(user) + gooAmount
+-            : gooBalance(user) - gooAmount;
++        uint256 updatedBalance = gooBalance(user);
++        if (updateType == GooBalanceUpdateType.INCREASE)
++            updatedBalance += gooAmount;
++        else
++            updatedBalance -= gooAmount;
+ 
+         // Snapshot the user's new goo balance with the current timestamp.
+         getUserData[user].lastBalance = uint128(updatedBalance);
 ```
