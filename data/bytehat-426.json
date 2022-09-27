@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "bytehat",
+  "address": "0x1f05bc74d12baf917df71b1eac90c0605ec0ca1a",
+  "risk": "2",
+  "title": "upgradeRandProvider could be bricked if still waiting for seed",
+  "issueId": 426,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/426"
+}
