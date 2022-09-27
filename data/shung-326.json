@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "shung",
+  "address": "0xa8101f6ec7080de84233f1ee4fc1d6a2c1568327",
+  "risk": "2",
+  "title": "Uncapped legendary gobbler auction start price can make effective auction interval lower than the actual interval",
+  "issueId": 326,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/326"
+}
