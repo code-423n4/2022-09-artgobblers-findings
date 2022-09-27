@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "pedroais",
+  "address": "0x7b13eb3f49525dcf09c01dbbbd34af8a4c8c83b5",
+  "risk": "2",
+  "title": "Gobblers can be fed with any contract that isn't art or even an NFT since the contract isn't validated",
+  "issueId": 237,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/237"
+}
