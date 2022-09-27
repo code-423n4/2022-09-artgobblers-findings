@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "Chom",
+  "address": "0xc4c459668fb29833d7dee997d7d347e2634c9cef",
+  "risk": "2",
+  "title": "GobblerReserve is missing onERC721Received, Gobbler transferred to reserve using safe transfer will be reverted.",
+  "issueId": 229,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/229"
+}
