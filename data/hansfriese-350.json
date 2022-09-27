@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "hansfriese",
+  "address": "0xf2dcb1d3b7091dcf2ce87ad115377c108ebe6dd4",
+  "risk": "3",
+  "title": "Users can recover already burned gobblers after minting a legendary gobbler.",
+  "issueId": 350,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/350"
+}
