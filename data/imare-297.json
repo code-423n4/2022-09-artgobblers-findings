@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "imare",
+  "address": "0x6584dbfb545cc95633bfe906dfce28b2d65581ee",
+  "risk": "3",
+  "title": "misbehaving random provider can brick the protocol",
+  "issueId": 297,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/297"
+}
