@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "cryptonue",
+  "address": "0xabcde0360abcba45098125e55437b005ae5df46f",
+  "risk": "2",
+  "title": "Using safeTransferFrom for ERC721 is safer than transferFrom",
+  "issueId": 421,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/421"
+}
