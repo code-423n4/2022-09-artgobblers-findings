@@ -17,7 +17,7 @@ mstore(str, 0)
 
 It is reasonable to not allocate such a slot at all (and to not store there zero value) to reduce gas consumption and make the code more clear.
 
-### 2. Using preincrement instead of postcrement in a loops
+### 2. Using preincrement instead of postcrement in loops
 
 There are many places where the index in a loop is incremented by the postincrement `i++`. The more efficient way to increment the variable is an `++i` preincrement. Also, the incrementation of variables can be put in `unchecked` brackets.
 
