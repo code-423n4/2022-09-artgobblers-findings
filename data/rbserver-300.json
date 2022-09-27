@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "rbserver",
+  "address": "0x4bd9605a3e546f3400df2c2be7b1c775aeea56bd",
+  "risk": "2",
+  "title": "Calling `gobble` function can only gobble 1 token at a time for the specified ERC1155 token",
+  "issueId": 300,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/300"
+}
