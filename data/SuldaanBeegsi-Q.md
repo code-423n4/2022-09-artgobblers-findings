@@ -6,7 +6,8 @@ The lines 62-68 are import lines were the developers have imported Owned.sol, ER
 
 Second issue:
 
-The use of Solmate header folding brakes when using vscode as the editor. 
+The use of Solmate header folding brakes when using vscode as the editor and from looking at the discord chat it breaks for other editors ex jetbrains. 
+
 
 Third issue: line 844 - ArtGobblers.sol
 
