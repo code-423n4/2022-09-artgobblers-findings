@@ -24,6 +24,11 @@ there are some more `require()` function inside `GobblersERC721.sol`, `GobblersE
 
 # ++I COSTS LESS GAS COMPARED TO I++ OR I += 1 (SAME FOR --I VS I-- OR I -= 1)
 
+_A common gas optimization which sometimes it miss to look up_
+
+
+There are some `i++` being used everywhere across contracts.
+
 Pre-increments and pre-decrements are cheaper.
 
 Increment:
