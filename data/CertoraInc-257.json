@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "CertoraInc",
+  "address": "0x09A9af114843218a7446929b1183eBec373B2827",
+  "risk": "2",
+  "title": "The `gobble` function can be used to transfer ERC20 tokens to the `ArtGobblers` contract",
+  "issueId": 257,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/257"
+}
