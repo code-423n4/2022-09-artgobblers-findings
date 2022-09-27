@@ -1,0 +1,9 @@
+{
+  "contest": 163,
+  "handle": "rbserver",
+  "address": "0x4bd9605a3e546f3400df2c2be7b1c775aeea56bd",
+  "risk": "3",
+  "title": "After deployment, `Pages` contract's community reserve address is incorrectly set to team's cold wallet address",
+  "issueId": 293,
+  "issueUrl": "https://github.com/code-423n4/2022-09-artgobblers-findings/issues/293"
+}
