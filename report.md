@@ -1,3 +1,11 @@
+---
+sponsor: "Art Gobblers"
+slug: "2022-09-artgobblers"
+date: "2022-12-09" 
+title: "Art Gobblers contest"
+findings: "https://github.com/code-423n4/2022-09-artgobblers-findings/issues"
+contest: 163
+---
 
 # Overview
 
